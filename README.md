@@ -5,6 +5,7 @@ Zzio is an archive format like cpio, tar, or zip. Libzzio can also parse and/or 
 
 ## Goals
 * Zlib compression
+* Streaming file format (extract while downloading)
 * Store any kind of metadata, including filesystem metadata and software dependencies
 * Parse: zzio, ubjson, json
 * Generate: zzio, ubjson, json, xml
