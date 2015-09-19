@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+\usepackage{hyperref}
+
+\title{\textsc{Zgio} File Format}
+\author{T. Buitenhuis}
+
+\begin{document}
+\maketitle
+
+\section{Container format}
+
+The container format, specified in \textsc{ebnf} format\cite{ebnf} (or something much like it) is:
+
+\begin{verbatim}
+archive  = "ZGIO", version, archmeta,
+             { filemeta, file },
+             index, offset
+version  = ? unsigned byte ?
+archmeta = metadata
+filemeta = metadata
+index    = metadata
+offset   = ? signed big endian 64 bit ?
+metadata = ? zlib reset, zlib compressed data ?
+file     = ? zlib compressed data ?
+\end{verbatim}
+
+\verb|version| is the version number of \textsc{zgio}.
+It is currently zero.
+
+\verb|offset| is the offset in bytes from the end of the archive file where \verb|index| begins.
+
+The state of zlib is reset at the beginning of every \verb|metadata| segment to allow extracting it and the following file (if any) without reading the whole archive.
+It is \emph{not} reset at the beginning of a \verb|file|.
+
+\section{Metadata format}
+
+The format of metadata is a subset of \textsc{ubjson}\cite{ubjson}.
+Extracting it and adding a \verb|'{'| character in front would create files that can be parsed with any \textsc{ubjson} parser that is up to date as of September 2015,
+but most \textsc{ubjson} files are not valid metadata for \textsc{zgio}.
+It is likely the entire \textsc{ubjson} standard will be supported in the future,
+after it reaches version \verb|1.0|.
+
+\section{Archive metadata (\texttt{archmeta})}
+
+\section{File metadata (\texttt{filemeta})}
+
+\section{Index metadata (\texttt{index})}
+
+\bibliography{spec}
+\bibliographystyle{ieeetr}
+
+\end{document}
