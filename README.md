@@ -1,5 +1,5 @@
 # ZGIO: Zero Gravity I/O
-Parser/generator library, command line utilities, and tcl bindings of those, for zgio archives and ubjson.
+Parser/generator library, tcl bindings, and command line utilities for zgio archives.
 
 Zgio is an archive format like cpio, tar, or zip. It can also be used to move large numbers of files around without storing a temporary archive on disk, making it a useful component for file managers, installers, and such.
 
